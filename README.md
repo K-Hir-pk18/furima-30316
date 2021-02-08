@@ -1,5 +1,18 @@
 # README
 
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
 ## Users
 
 |Column             |Type     |Options                    |
@@ -16,8 +29,8 @@
 | birth_date        | integer | null: false               |
 
 ### Association
-Products
-Purchases
+- has_many :Products
+- has_many :Purchases
 
 
 ## Products
@@ -35,10 +48,9 @@ Purchases
 | user           | reference | foreign_key: true |
 
 ### Association
-Users
-Send_require
-Images
-Purchases
+-belongs_to :Users
+-has_one_attached :Images
+-has_one_attached :Purchases
 
 
 ## Images
@@ -49,7 +61,8 @@ Purchases
 | product    | reference | foreign_key: true |
 
 ### Association
-Products
+-belongs_to :Products
+
 
 ## Purchases
 
@@ -64,32 +77,9 @@ Products
 | product        | reference | foreign_key: true |
 | user           | reference | foreign_key: true |
 
-
 ### Association
-Users
-Send_require
-Images
-Purchases
-
-option
-null: false	カラムが空の状態では保存できない
-unique: true	一意性のみ許可（同じ値は保存できない）
-foreign_key: true	外部キーを設定（別テーブルのカラムを参照する）
-
-
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
+-belongs_to :Users
+-belongs_to :Products
 
 * Database initialization
 
