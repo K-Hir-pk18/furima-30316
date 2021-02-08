@@ -41,7 +41,7 @@ Things you may want to cover:
 | send_charge_id | integer   | null: false       |
 | prefecture_id  | integer   | null: false       |
 | send_span_id   | integer   | null: false       |
-| user_id        | reference | foreign_key: true |
+| user           | reference | foreign_key: true |
 
 ### Association
 -belongs_to :User
@@ -57,6 +57,7 @@ Things you may want to cover:
 ### Association
 -belongs_to :User
 -belongs_to :Product
+-has_one :purchase
 
 
 ## Purchases
@@ -68,9 +69,10 @@ Things you may want to cover:
 | banch          | string    | null: false       |
 | building_name  | string    |                   |
 | telephone      | string    | null: false       |
+| purchase_log   | reference | foreign_key: true |
 
 ### Association
--has_one :Purchase_log
+-belongs_to :Purchase_log
 
 
 * Database initialization
