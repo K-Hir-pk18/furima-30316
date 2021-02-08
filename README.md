@@ -16,7 +16,7 @@ Things you may want to cover:
 ## Users
 |Column              |Type     |Options                    |
 |--------------------|---------|---------------------------|
-| nickname           | string  | null: false, unique: true |
+| nickname           | string  | null: false               |
 | email              | string  | null: false, unique: true |
 | encrypted_password | string  | null: false               |
 | familyname_kanji   | string  | null: false               |
@@ -27,7 +27,7 @@ Things you may want to cover:
 
 ### Association
 - has_many :Products
-- has_many :Purchases
+- has_many :Purchase_logs
 
 
 ## Products
@@ -44,8 +44,20 @@ Things you may want to cover:
 | user_id        | reference | foreign_key: true |
 
 ### Association
--belongs_to :Users
--has_one_attached :Purchases
+-belongs_to :User
+-has_one :Purchase_log
+
+
+## Purchase_logs
+|Column          |Type       |Options            |
+|----------------|-----------|-------------------|
+| product        | reference | foreign_key: true |
+| user           | reference | foreign_key: true |
+
+### Association
+-belongs_to :User
+-belongs_to :Product
+
 
 ## Purchases
 |Column          |Type       |Options            |
@@ -55,13 +67,11 @@ Things you may want to cover:
 | municipality   | string    | null: false       |
 | banch          | string    | null: false       |
 | building_name  | string    |                   |
-| telephone      | string    | foreign_key: true |
-| product        | reference | foreign_key: true |
-| user           | reference | foreign_key: true |
+| telephone      | string    | null: false       |
 
 ### Association
--belongs_to :Users
--belongs_to :Products
+-has_one :Purchase_log
+
 
 * Database initialization
 
