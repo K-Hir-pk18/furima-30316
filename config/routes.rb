@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'products#index'
-  resources :users, only: [:edit, :update]
-  resources :products, only: :index
+  root to: "products#index"
+  resources :users
+  resources :products
     ## pictweet コピペ
   ##resources :purchases do
     ##resources :comments, only: :create

@@ -5,6 +5,7 @@ RSpec.describe 'ユーザー新規登録', type: :system do
     @user = FactoryBot.build(:user)
   end
 
+
   context 'ユーザー新規登録ができるとき' do 
     it '正しい情報を入力すればユーザー新規登録ができてトップページに移動する' do
       visit root_path
@@ -13,12 +14,12 @@ RSpec.describe 'ユーザー新規登録', type: :system do
       fill_in 'Nickname', with: @user.nickname
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: @user.password
-      fill_in 'Password confirmation', with: @user.password_confirmation
-      fill_in 'family_name_kanji', with: @user.password
-      fill_in 'first_name_kanji', with: @user.password
-      fill_in 'family_name_kana', with: @user.password
-      fill_in 'first_name_kana', with: @user.password
-      fill_in 'birth_profile', with: @user.password
+      fill_in 'Password_confirmation', with: @user.password_confirmation
+      fill_in 'family_name_kanji', with: @user.family_name_kanji
+      fill_in 'first_name_kanji', with: @user.first_name_kanji
+      fill_in 'family_name_kana', with: @user.family_name_kana
+      fill_in 'first_name_kana', with: @user.first_name_kana
+      fill_in 'birth_profile', with: @user.birth_profile
 
       expect{find('input[name="commit"]').click}.to change { User.count }.by(1)
       expect(current_path).to eq root_path

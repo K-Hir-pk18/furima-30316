@@ -3,12 +3,11 @@ class ProductsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
 
   def index
-    @prodcuts = Products.all
   end
 
-  def new
-    @product = Product.new
-  end
+  #def new
+    #@product = Product.new
+  #end
 
   #def create
     #Product.create(product_params)
@@ -43,5 +42,5 @@ class ProductsController < ApplicationController
     unless user_signed_in?
       redirect_to action: :index
     end
-
+  end
 end
