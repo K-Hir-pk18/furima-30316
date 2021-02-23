@@ -29,18 +29,18 @@ class ProductsController < ApplicationController
   #def show
   #end
 
-  private
+  #private
   #def proruct_params
     #params.require(:tweet).permit(:name, :image, :text)
   #end
 
-  def set_product
-    @product = produt.find(params[:id])
-  end
+  #def set_product
+    #@product = produt.find(params[:id])
+  #end
 
-  def move_to_index
-    unless user_signed_in?
-      redirect_to action: :index
-    end
-  end
+  #def move_to_index
+    #unless user_signed_in?
+      #redirect_to action: :index
+    #end
+  #end
 end
