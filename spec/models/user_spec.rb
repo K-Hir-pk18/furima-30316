@@ -199,19 +199,19 @@ RSpec.describe 'User', type: :model do
       @user = FactoryBot.create(:user)
     end
 
-    context 'ログインができるとき' do
-      it '保存されているユーザーの情報と合致すればログインができる' do
-        visit root_path
-        expect(page).to have_content('ログイン')
-        visit new_user_session_path
-        fill_in 'user[email]', with: @user.email
-        fill_in 'user[password]', with: @user.password
-        find('input[name="commit"]').click
-        expect(current_path).to eq root_path
-        expect(page).to have_content('ログアウト')
-        expect(page).to have_no_content('新規登録')
-        expect(page).to have_no_content('ログイン')
-      end
-    end
-  end
+    #context 'ログインができるとき' do
+      #it '保存されているユーザーの情報と合致すればログインができる' do
+        #visit root_path
+        #expect(page).to have_content('ログイン')
+        #visit new_user_session_path
+        #fill_in 'user[email]', with: @user.email
+        #fill_in 'user[password]', with: @user.password
+        #find('input[name="commit"]').click
+        #expect(current_path).to eq root_path
+        #expect(page).to have_content('ログアウト')
+        #expect(page).to have_no_content('新規登録')
+        #expect(page).to have_no_content('ログイン')
+      #end
+    #end
+  #end
 end
