@@ -62,7 +62,12 @@ RSpec.describe 'User', type: :model do
         expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
       end
     
-    
+      it 'パスワードが全角だと新規登録できない' do
+        @user.password = '観阿弥世阿弥'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+      end
+      
       it 'パスワード確認用がないと新規登録できない' do
         @user.password_confirmation = ''
         @user.valid?
@@ -135,4 +140,5 @@ RSpec.describe 'User', type: :model do
     before do
       @user = FactoryBot.create(:user)
     end
+  end
 end
