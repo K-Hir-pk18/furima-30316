@@ -1,17 +1,24 @@
 class ProductsController < ApplicationController
-  before_action :set_products, only: [:edit, :show]
+  #before_action :set_products, only: [:edit, :show]
   before_action :move_to_index, except: [:index, :show]
 
   def index
+    @products = Product.all
   end
 
-  #def new
-    #@product = Product.new
-  #end
+  def new
+    @product = Product.new
+  end
 
-  #def create
-    #Product.create(product_params)
-  #end
+  def create
+    @product = Product.new(product_params)
+    if @product.valid?
+      @product.save
+      redirect_to root_path
+    else
+      render :new
+    end
+  end
 
   #def destroy
     #product = Product.find(params[:id])
@@ -22,25 +29,28 @@ class ProductsController < ApplicationController
   #end
 
   #def update
-    #prodcut = Prodcut.find(params[:id])
-    #product.update(product_params)
+    #if current_user.update(product_params)
+      #redirect_to root_path
+    #else
+      #render :edit
+    #end
   #end
 
   #def show
   #end
 
-  #private
-  #def proruct_params
-    #params.require(:tweet).permit(:name, :image, :text)
-  #end
+private
+  def product_params
+    params.require(:product).permit(:product_name, :feature, :price, :image, :category_id ,:condition_id , :send_charge_id, :prefecture_id, :send_span_id).merge(user_id: current_user.id)
+  end
 
   #def set_product
     #@product = produt.find(params[:id])
   #end
 
-  #def move_to_index
-    #unless user_signed_in?
-      #redirect_to action: :index
-    #end
-  #end
+  def move_to_index
+    unless user_signed_in?
+      redirect_to action: :index
+    end
+  end
 end
