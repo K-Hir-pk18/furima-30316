@@ -66,6 +66,36 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Send span can't be blank")
         end
 
+        it 'カテゴリーの情報が未選択だと出品できない' do
+          @product.category_id = 0
+          @product.valid?
+          expect(@product.errors.full_messages).to include("Category can't be blank")
+          end
+        
+        it '商品の状態が未選択だと出品できない' do
+          @product.condition_id = 0
+          @product.valid?
+          expect(@product.errors.full_messages).to include("Condition can't be blank")
+          end
+  
+        it '配送料の負担が未選択だと出品できない' do
+          @product.send_charge_id = 0
+          @product.valid?
+          expect(@product.errors.full_messages).to include("Send charge can't be blank")
+          end
+        
+        it '発送元の地域が未選択だと出品できない' do
+          @product.prefecture_id = 0
+          @product.valid?
+          expect(@product.errors.full_messages).to include("Prefecture can't be blank")
+        end
+  
+        it '発送までの日数が未選択だと出品できない' do
+          @product.send_span_id = 0
+          @product.valid?
+          expect(@product.errors.full_messages).to include("Send span can't be blank")
+          end
+
       it '価格が入力されてないと出品できない' do
         @product.price = nil
         @product.valid?
@@ -73,21 +103,39 @@ RSpec.describe Product, type: :model do
         end
 
       it '価格の範囲が、¥300以下だと出品できない' do
-        @product.price = '250'
+        @product.price = 250
         @product.valid?
         expect(@product.errors.full_messages).to include("Price is out of setting range")
       end
       
       it '価格の範囲が、¥9,999,999以上だと出品できない' do
-        @product.price = '99999999'
+        @product.price = 99999999
         @product.valid?
         expect(@product.errors.full_messages).to include("Price is out of setting range")
       end
       
-      it '販売価格は半角数字だと出品できない' do
+      it '販売価格は全角数字だと出品できない' do
         @product.price = '５００'
         @product.valid?
         expect(@product.errors.full_messages).to include("Price is out of setting range")
+      end
+
+        it '販売価格は半角英字だと出品できない' do
+          @product.price = 'monza'
+          @product.valid?
+          expect(@product.errors.full_messages).to include("Price is out of setting range")
+        end
+
+        it '販売価格は半角英数字混合だと出品できない' do
+          @product.price = 'mnz1653'
+          @product.valid?
+          expect(@product.errors.full_messages).to include("Price is out of setting range")
+        end
+
+          it '販売価格は全角数字だと出品できない' do
+            @product.price = '５００'
+            @product.valid?
+            expect(@product.errors.full_messages).to include("Price is out of setting range")
       end        
     end
   end
