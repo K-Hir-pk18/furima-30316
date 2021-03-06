@@ -20,16 +20,16 @@ class Product < ApplicationRecord
     validates :send_span_id
   end
 
-  validates :price, numericality: { only_integer: true, message: "is invalid. Input half-width characters." }
-  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range" }
+  validates :price, numericality: { only_integer: true, message: 'is invalid. Input half-width characters.' }
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'is out of setting range' }
 
-  #可読性アップ
-  #validates :category_id, numericality: { other_than: 0, message: "can't be blank" }
-  #alidates :condition_id, numericality: { other_than: 0, message: "can't be blank" }
-  #validates :send_charge_id, numericality: { other_than: 0, message: "can't be blank" }
-  #validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
-  #validates :send_span_id, numericality: { other_than: 0, message: "can't be blank" }
-  #可読性アップ
+  # 可読性アップ
+  # validates :category_id, numericality: { other_than: 0, message: "can't be blank" }
+  # alidates :condition_id, numericality: { other_than: 0, message: "can't be blank" }
+  # validates :send_charge_id, numericality: { other_than: 0, message: "can't be blank" }
+  # validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
+  # validates :send_span_id, numericality: { other_than: 0, message: "can't be blank" }
+  # 可読性アップ
 
   with_options numericality: { other_than: 0, message: "can't be blank" } do
     validates :category_id
@@ -38,5 +38,4 @@ class Product < ApplicationRecord
     validates :prefecture_id
     validates :send_span_id
   end
-
 end
