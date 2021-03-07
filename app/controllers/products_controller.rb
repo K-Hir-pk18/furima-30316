@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    #@purchases = Purchase.all
   end
 
   def new
