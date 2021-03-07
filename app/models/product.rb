@@ -38,4 +38,8 @@ class Product < ApplicationRecord
     validates :prefecture_id
     validates :send_span_id
   end
+
+  def was_attached?
+    self.image.attached?
+  end
 end
