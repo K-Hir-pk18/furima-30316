@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   # before_action :set_products, only: [:edit, :show]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :find_param, only: [:show, :edit, :update]
+  before_action :confirm_user, only: [:edit, :update]
 
   def index
     @products = Product.all.order("created_at DESC")
@@ -24,15 +25,14 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    if current_user.id != @product.user_id
-      redirect_to action: :index
-    end
   end
 
   def update
     @product.update(product_params)
     unless @product.save
       render :edit
+    else
+      redirect_to action: :show
     end
   end
 
@@ -49,6 +49,12 @@ class ProductsController < ApplicationController
 
   def find_param
     @product = Product.find(params[:id])
+  end
+
+  def confirm_user
+    if current_user.id != @product.user_id
+      redirect_to action: :index
+    end
   end
 
   # def set_product

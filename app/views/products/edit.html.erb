@@ -138,7 +138,7 @@
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "変更する" ,class:"sell-btn" %>
-      <%=link_to 'もどる', "product_path(product.id)", class:"back-btn" %>
+      <%=link_to 'もどる', product_path(@product.id), class:"back-btn" %>
     </div>
     <%# /下部ボタン %>
   </div>
