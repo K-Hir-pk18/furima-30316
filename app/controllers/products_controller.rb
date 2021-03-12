@@ -29,10 +29,10 @@ class ProductsController < ApplicationController
 
   def update
     @product.update(product_params)
-    unless @product.save
-      render :edit
-    else
+    if @product.save
       redirect_to action: :show
+    else
+      render :edit
     end
   end
 
