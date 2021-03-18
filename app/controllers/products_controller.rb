@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-  # before_action :set_products, only: [:edit, :show]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :find_param, only: [:show, :edit, :update, :destroy]
   before_action :confirm_user, only: [:edit, :update, :destroy]
@@ -57,7 +56,4 @@ class ProductsController < ApplicationController
     end
   end
 
-  # def set_product
-  # @product = produt.find(params[:id])
-  # end
 end
