@@ -48,7 +48,7 @@ RSpec.describe PurchaseForm, type: :model do
         expect(@purchase_form.errors.full_messages).to include('Postal code is invalid')
       end
       it '配送先の情報として、都道府県が選択されていないとエラーが出ること' do
-        @purchase_form.prefecture_id = '0'
+        @purchase_form.prefecture_id = 0
         @purchase_form.valid?
         expect(@purchase_form.errors.full_messages).to include("Prefecture can't be blank")
       end
