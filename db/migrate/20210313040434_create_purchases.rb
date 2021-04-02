@@ -1,7 +1,7 @@
 class CreatePurchases < ActiveRecord::Migration[6.0]
   def change
     create_table :purchases do |t|
-      t.integer :postal_code, null: false
+      t.string :postal_code, null: false
       t.integer :prefecture_id, null: false
       t.text :municipality, null: false
       t.text :banch, null: false

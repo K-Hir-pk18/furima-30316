@@ -132,9 +132,10 @@
               <div class='item-img-content'>
                 <%= image_tag product.image, class: 'item-img' if product.image.attached? %>
                 <div class='sold-out'>
-                  <%# if %>
-                  <%# <span>Sold Out!!</span>
-                  <%# <% end %>
+                  <%if product.purchase_log != nil %>
+                  <span>Sold Out!!</span>
+                  <% else %>
+                  <% end %>
                 </div>
               </div>
               <div class='item-info'>

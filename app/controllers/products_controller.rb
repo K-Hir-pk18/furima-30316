@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   before_action :confirm_user, only: [:edit, :update, :destroy]
 
   def index
-    @products = Product.all.order("created_at DESC")
+    @products = Product.all.order('created_at DESC')
   end
 
   def new
@@ -35,10 +35,10 @@ class ProductsController < ApplicationController
     end
   end
 
-   def destroy
+  def destroy
     @product.destroy
     redirect_to root_path
-   end
+  end
 
   private
 
@@ -51,9 +51,6 @@ class ProductsController < ApplicationController
   end
 
   def confirm_user
-    if current_user.id != @product.user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index if current_user.id != @product.user_id
   end
-
 end
