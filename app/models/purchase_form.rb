@@ -5,11 +5,13 @@ class PurchaseForm
   with_options presence: true do
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/ }
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
-    validates :municipality # , format: { with: /\A[ぁ-んァ-ン一-龥々]+\z/ }
-    validates :banch # , format: { with: /\A[ぁ-んァ-ン一-龥々]+\z/ }
+    validates :municipality
+    validates :banch
     validates :telephone, length: { in: 10..11 }
     validates :telephone, format: { with: /\A[0-9]+\z/ }
     validates :token
+    validates :user_id
+    validates :product_id
   end
 
   def save

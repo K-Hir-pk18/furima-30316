@@ -14,9 +14,13 @@ RSpec.describe PurchaseForm, type: :model do
       it '必要な情報を適切に入力すると、商品の購入ができる' do
         expect(@purchase_form).to be_valid
       end
+      it '建物名がなくても商品の購入ができる' do
+        @purchase_form.building_name = nil
+        expect(@purchase_form).to be_valid
+      end
     end
 
-    context '異常系 クレジット関連', type: :model do
+    context '異常系 商品購入できない', type: :model do
       it 'トークンが空白だと決済できないこと' do
         @purchase_form.token = nil
         @purchase_form.valid?
@@ -44,7 +48,7 @@ RSpec.describe PurchaseForm, type: :model do
         expect(@purchase_form.errors.full_messages).to include('Postal code is invalid')
       end
       it '配送先の情報として、都道府県が選択されていないとエラーが出ること' do
-        @purchase_form.prefecture_id = nil
+        @purchase_form.prefecture_id = '0'
         @purchase_form.valid?
         expect(@purchase_form.errors.full_messages).to include("Prefecture can't be blank")
       end
@@ -72,6 +76,16 @@ RSpec.describe PurchaseForm, type: :model do
         @purchase_form.telephone = '012345678901'
         @purchase_form.valid?
         expect(@purchase_form.errors.full_messages).to include('Telephone is too long (maximum is 11 characters)')
+      end
+      it 'user_idが必須であること' do
+        @purchase_form.user_id = nil
+        @purchase_form.valid?
+        expect(@purchase_form.errors.full_messages).to include("User can't be blank")
+      end
+      it 'product_idが必須であること' do
+        @purchase_form.product_id = nil
+        @purchase_form.valid?
+        expect(@purchase_form.errors.full_messages).to include("Product can't be blank")
       end
     end
   end

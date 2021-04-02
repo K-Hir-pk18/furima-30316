@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :find_param, only: [:show, :edit, :update, :destroy]
   before_action :confirm_user, only: [:edit, :update, :destroy]
+  before_action :after_purchase_restriction, only: [:edit, :update, :destroy]
 
   def index
     @products = Product.all.order('created_at DESC')
@@ -24,9 +25,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    if !@product.purchase_log.nil?
-      redirect_to root_path
-    end
   end
 
   def update
@@ -55,5 +53,11 @@ class ProductsController < ApplicationController
 
   def confirm_user
     redirect_to action: :index if current_user.id != @product.user_id
+  end
+
+  def after_purchase_restriction
+    if !@product.purchase_log.nil?
+      redirect_to root_path
+    end
   end
 end
