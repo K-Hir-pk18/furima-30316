@@ -1,11 +1,11 @@
 class ProductsController < ApplicationController
-  # before_action :set_products, only: [:edit, :show]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :find_param, only: [:show, :edit, :update, :destroy]
   before_action :confirm_user, only: [:edit, :update, :destroy]
+  before_action :after_purchase_restriction, only: [:edit, :update, :destroy]
 
   def index
-    @products = Product.all.order("created_at DESC")
+    @products = Product.all.order('created_at DESC')
   end
 
   def new
@@ -36,10 +36,10 @@ class ProductsController < ApplicationController
     end
   end
 
-   def destroy
+  def destroy
     @product.destroy
     redirect_to root_path
-   end
+  end
 
   private
 
@@ -52,12 +52,12 @@ class ProductsController < ApplicationController
   end
 
   def confirm_user
-    if current_user.id != @product.user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index if current_user.id != @product.user_id
   end
 
-  # def set_product
-  # @product = produt.find(params[:id])
-  # end
+  def after_purchase_restriction
+    if !@product.purchase_log.nil?
+      redirect_to root_path
+    end
+  end
 end

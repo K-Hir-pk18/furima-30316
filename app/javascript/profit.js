@@ -8,5 +8,4 @@ window.addEventListener('load', () => {
     addTaxDom.innerHTML = Math.floor(inputValue * 0.1)
   });
   })
-
   

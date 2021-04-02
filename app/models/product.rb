@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+
   belongs_to :category
   belongs_to :condition
   belongs_to :send_charge
@@ -7,6 +8,7 @@ class Product < ApplicationRecord
   belongs_to :send_span
   belongs_to :user
   has_one_attached :image
+  has_one :purchase_log
 
   with_options presence: true do
     validates :product_name
@@ -23,14 +25,6 @@ class Product < ApplicationRecord
   validates :price, numericality: { only_integer: true, message: 'is invalid. Input half-width characters.' }
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'is out of setting range' }
 
-  # 可読性アップ
-  # validates :category_id, numericality: { other_than: 0, message: "can't be blank" }
-  # alidates :condition_id, numericality: { other_than: 0, message: "can't be blank" }
-  # validates :send_charge_id, numericality: { other_than: 0, message: "can't be blank" }
-  # validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
-  # validates :send_span_id, numericality: { other_than: 0, message: "can't be blank" }
-  # 可読性アップ
-
   with_options numericality: { other_than: 0, message: "can't be blank" } do
     validates :category_id
     validates :condition_id
@@ -40,6 +34,6 @@ class Product < ApplicationRecord
   end
 
   def was_attached?
-    self.image.attached?
+    image.attached?
   end
 end
