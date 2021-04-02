@@ -52,7 +52,9 @@ class ProductsController < ApplicationController
   end
 
   def confirm_user
-    redirect_to action: :index if current_user.id != @product.user_id
+    if current_user.id != @product.user_id
+      redirect_to action: :index 
+    end
   end
 
   def after_purchase_restriction
