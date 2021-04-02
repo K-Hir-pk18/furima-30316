@@ -77,6 +77,11 @@ RSpec.describe PurchaseForm, type: :model do
         @purchase_form.valid?
         expect(@purchase_form.errors.full_messages).to include('Telephone is too long (maximum is 11 characters)')
       end
+      it '電話番号は英字が入っていると不可である' do
+        @purchase_form.telephone = '0901234567a'
+        @purchase_form.valid?
+        expect(@purchase_form.errors.full_messages).to include('Telephone is invalid')
+      end
       it 'user_idが必須であること' do
         @purchase_form.user_id = nil
         @purchase_form.valid?
